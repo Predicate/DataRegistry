@@ -1,0 +1,12 @@
+## Interface: 50400
+## Title: DataRegistry
+## Notes: Tracks shared data objects and notifies addons of changes to them.
+## Author: Predicate
+## X-Credits: Based on LibDataBroker-1.1 by tekkub.
+## LoadOnDemand: true
+## RequiredDeps: BlankSlate
+
+libs\LibStub.lua
+libs\CallbackHandler-1.0.lua
+
+DataRegistry.lua
