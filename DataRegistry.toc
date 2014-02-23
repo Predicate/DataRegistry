@@ -3,7 +3,7 @@
 ## Notes: Tracks shared data objects and notifies addons of changes to them.
 ## Author: Predicate
 ## X-Credits: Based on LibDataBroker-1.1 by tekkub.
-## LoadOnDemand: true
+## LoadOnDemand: 1
 ## OptionalDeps: BlankSlate
 
 libs\LibStub.lua
