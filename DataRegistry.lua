@@ -72,7 +72,7 @@ end
 --@param dataobject_or_name The data object to be destroyed, or its registered name.
 function DataRegistry.DestroyDataObject(dataobject_or_name)
 	local t = type(dataobject_or_name)
-	assert(t == "string" or t == "table", "Usage: DataRegistry:pairs('dataobjectname') or DataRegistry:pairs(dataobject)")
+	assert(t == "string" or t == "table", "Usage: DataRegistry.pairs('dataobjectname') or DataRegistry.pairs(dataobject)")
 	local dataobj = proxystorage[dataobject_or_name] or dataobject_or_name
 	assert(attributestorage[dataobj], "Data object not found")
 	local name = namestorage[dataobj]
@@ -89,7 +89,7 @@ local next = pairs(attributestorage)
 --@return An iterator for keys in the given data object.
 function DataRegistry.pairs(dataobject_or_name)
 	local t = type(dataobject_or_name)
-	assert(t == "string" or t == "table", "Usage: DataRegistry:pairs('dataobjectname') or DataRegistry:pairs(dataobject)")
+	assert(t == "string" or t == "table", "Usage: DataRegistry.pairs('dataobjectname') or DataRegistry.pairs(dataobject)")
 	local dataobj = proxystorage[dataobject_or_name] or dataobject_or_name
 	assert(attributestorage[dataobj], "Data object not found")
 	return next, attributestorage[dataobj], nil
@@ -102,7 +102,7 @@ local ipairs_iter = ipairs(attributestorage)
 --@return An iterator for integer keys in the given data object.
 function DataRegistry.ipairs(dataobject_or_name)
 	local t = type(dataobject_or_name)
-	assert(t == "string" or t == "table", "Usage: DataRegistry:ipairs('dataobjectname') or DataRegistry:ipairs(dataobject)")
+	assert(t == "string" or t == "table", "Usage: DataRegistry.ipairs('dataobjectname') or DataRegistry.ipairs(dataobject)")
 	local dataobj = proxystorage[dataobject_or_name] or dataobject_or_name
 	assert(attributestorage[dataobj], "Data object not found")
 	return ipairs_iter, attributestorage[dataobj], 0
