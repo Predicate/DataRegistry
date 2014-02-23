@@ -4,7 +4,7 @@
 ## Author: Predicate
 ## X-Credits: Based on LibDataBroker-1.1 by tekkub.
 ## LoadOnDemand: true
-## RequiredDeps: BlankSlate
+## OptionalDeps: BlankSlate
 
 libs\LibStub.lua
 libs\CallbackHandler-1.0.lua

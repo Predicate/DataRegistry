@@ -23,8 +23,13 @@ local domt = {
 	end
 }
 
-
-function DataRegistry:NewDataObject(name, dataobj)
+---Creates a new data object with the given name.
+--Fires a callback to inform listeners of the new data object.
+--If a table is passed as the second arg, its values are stored in the new data object before the callback is fired.
+--@param name Name of the new data object.
+--@param dataobj Optional table containing initial state for the data object.
+--@return The newly created object.
+function DataRegistry.NewDataObject(name, dataobj)
 	if proxystorage[name] then return end
 
 	if dataobj then
@@ -41,19 +46,31 @@ function DataRegistry:NewDataObject(name, dataobj)
 	return dataobj
 end
 
-function DataRegistry:DataObjectIterator()
+---Iterates over registered data objects.
+--@return An iterator for registered data objects.
+--@usage for name, dataobj in DataRegistry.DataObjectIterator() do ... end
+function DataRegistry.DataObjectIterator()
 	return pairs(proxystorage)
 end
 
-function DataRegistry:GetDataObjectByName(dataobjectname)
+---Retrieves a data object by name.
+--@param dataobjectname The name of the object.
+--@return The data object registered by the given name, if found.
+function DataRegistry.GetDataObjectByName(dataobjectname)
 	return proxystorage[dataobjectname]
 end
 
-function DataRegistry:GetNameByDataObject(dataobject)
+---Looks up the name of a data object.
+--@param dataobject A data object to look up.
+--@return The name of the data object, if found.
+function DataRegistry.GetNameByDataObject(dataobject)
 	return namestorage[dataobject]
 end
 
-function DataRegistry:DestroyDataObject(dataobject_or_name)
+---Destroys a registered data object.
+--Fires a callback to inform listeners of the data object's destruction.
+--@param dataobject_or_name The data object to be destroyed, or its registered name.
+function DataRegistry.DestroyDataObject(dataobject_or_name)
 	local t = type(dataobject_or_name)
 	assert(t == "string" or t == "table", "Usage: DataRegistry:pairs('dataobjectname') or DataRegistry:pairs(dataobject)")
 	local dataobj = proxystorage[dataobject_or_name] or dataobject_or_name
@@ -65,9 +82,12 @@ function DataRegistry:DestroyDataObject(dataobject_or_name)
 	callbacks:Fire("DataRegistry_DataObjectDestroyed", name, dataobj)
 end
 
-
 local next = pairs(attributestorage)
-function DataRegistry:pairs(dataobject_or_name)
+---Iterates over the keys stored in a given data object.
+--Use this instead of pairs() on registered data objects.
+--@param dataobject_or_name The data object to iterate, or its registered name.
+--@return An iterator for keys in the given data object.
+function DataRegistry.pairs(dataobject_or_name)
 	local t = type(dataobject_or_name)
 	assert(t == "string" or t == "table", "Usage: DataRegistry:pairs('dataobjectname') or DataRegistry:pairs(dataobject)")
 	local dataobj = proxystorage[dataobject_or_name] or dataobject_or_name
@@ -76,7 +96,11 @@ function DataRegistry:pairs(dataobject_or_name)
 end
 
 local ipairs_iter = ipairs(attributestorage)
-function DataRegistry:ipairs(dataobject_or_name)
+---Iterates over the integer keys stored in a given data object.
+--Use this instead of ipairs() on registered data objects.
+--@param dataobject_or_name The data object to iterate, or its registered name.
+--@return An iterator for integer keys in the given data object.
+function DataRegistry.ipairs(dataobject_or_name)
 	local t = type(dataobject_or_name)
 	assert(t == "string" or t == "table", "Usage: DataRegistry:ipairs('dataobjectname') or DataRegistry:ipairs(dataobject)")
 	local dataobj = proxystorage[dataobject_or_name] or dataobject_or_name
