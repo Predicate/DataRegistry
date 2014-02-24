@@ -79,7 +79,7 @@ function DataRegistry.DestroyDataObject(dataobject_or_name)
 	attributestorage[dataobj] = nil
 	namestorage[dataobj] = nil
 	proxystorage[name] = nil
-	callbacks:Fire("DataRegistry_DataObjectDestroyed", name, dataobj)
+	callbacks:Fire("DataRegistry_DataObjectDestroyed", name)
 end
 
 local next = pairs(attributestorage)
