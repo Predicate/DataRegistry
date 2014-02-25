@@ -3,7 +3,7 @@ do
 	_G[addon] = _G[addon] or {}
 	setfenv(1, setmetatable(namespace, { __index = _G }))
 end
-local callbacks = LibStub:GetLibrary("CallbackHandler-1.0"):New(DataRegistry)
+callbacks = LibStub:GetLibrary("CallbackHandler-1.0"):New(DataRegistry)
 
 local attributestorage, namestorage, proxystorage = {}, {}, {}
 
