@@ -30,7 +30,8 @@ local domt = {
 --@param dataobj Optional table containing initial state for the data object.
 --@return The newly created object.
 function DataRegistry.NewDataObject(name, dataobj)
-	if proxystorage[name] then return end
+	assert(name, "Name required for new dataobj")
+	assert(proxystorage[name] == nil, "Invalid name, dataobj '"..name.."' already exists")
 
 	if dataobj then
 		assert(type(dataobj) == "table", "Invalid dataobj, must be nil or a table")
@@ -72,7 +73,7 @@ end
 --@param dataobject_or_name The data object to be destroyed, or its registered name.
 function DataRegistry.DestroyDataObject(dataobject_or_name)
 	local t = type(dataobject_or_name)
-	assert(t == "string" or t == "table", "Usage: DataRegistry.pairs('dataobjectname') or DataRegistry.pairs(dataobject)")
+	assert(t == "string" or t == "table", "Usage: DataRegistry.DestroyDataObject('dataobjectname') or DataRegistry.DestroyDataObject(dataobject)")
 	local dataobj = proxystorage[dataobject_or_name] or dataobject_or_name
 	assert(attributestorage[dataobj], "Data object not found")
 	local name = namestorage[dataobj]
